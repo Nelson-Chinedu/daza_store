@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SocialAuth extends StatelessWidget {
-  const SocialAuth({super.key});
+  final String dividerText;
+
+  const SocialAuth({super.key, required this.dividerText});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class SocialAuth extends StatelessWidget {
               Expanded(child: Divider(color: Colors.grey)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text('Or sign in with'),
+                child: Text(dividerText),
               ),
               Expanded(child: Divider(color: Colors.grey)),
             ],
