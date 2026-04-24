@@ -3,14 +3,14 @@ import 'package:daza_store_commerce/shared/widgets/socials_auth/socials_auth_vie
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignupView extends StatefulWidget {
+  const SignupView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignupView> createState() => _SignupViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignupViewState extends State<SignupView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,18 +39,22 @@ class _LoginViewState extends State<LoginView> {
               Center(
                 child: Column(
                   children: [
-                    const SizedBox(height: 160),
+                    const SizedBox(height: 75),
                     Text(
-                      "Let's get you Login!",
+                      "Create Account",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     Text(
-                      "Hi! Welcome back, you've been missed",
+                      "Fill your information below or register",
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    Text(
+                      "with your social account.",
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     const SizedBox(height: 80),
@@ -58,7 +62,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               Positioned(
-                bottom: -120,
+                bottom: -160,
                 left: 30,
                 right: 30,
                 child: Container(
@@ -71,7 +75,24 @@ class _LoginViewState extends State<LoginView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // socialLogin(context),
-                      SocialAuth(dividerText: "Or sign in with"),
+                      SocialAuth(dividerText: "Or sign up with"),
+                      Text('Name'),
+                      const SizedBox(height: 5),
+                      TextField(
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          hintText: 'John Doe',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
                       Text('Email'),
                       const SizedBox(height: 5),
                       TextField(
@@ -111,18 +132,36 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       const SizedBox(height: 10),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              'Forgot Password?',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xFFF8B057),
-                                decoration: TextDecoration.underline,
-                                decorationColor: Color(0xFFF8B057),
-                              ),
+                          Transform.scale(
+                            scale: 1.20,
+                            child: Checkbox.adaptive(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              visualDensity: VisualDensity.compact,
+                              value: false,
+                              onChanged: (value) {
+                                print(value);
+                              },
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              text: 'Agree with',
+                              style: TextStyle(color: Colors.black),
+                              children: [
+                                TextSpan(
+                                  text: ' Terms and Conditions',
+                                  style: TextStyle(
+                                    color: Color(0xFFF8B057),
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -130,7 +169,7 @@ class _LoginViewState extends State<LoginView> {
                       const SizedBox(height: 30),
                       SizedBox(
                         width: double.infinity,
-                        child: Button(label: 'Sign In'),
+                        child: Button(label: 'Sign Up'),
                       ),
                       const SizedBox(height: 30),
                       Center(
