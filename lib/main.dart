@@ -1,8 +1,12 @@
 // import 'package:daza_store_commerce/features/auth/Login/view/login_view.dart';
-import 'package:daza_store_commerce/features/auth/Signup/view/signup_view.dart';
+// import 'package:daza_store_commerce/features/auth/Signup/view/signup_view.dart';
+import 'package:daza_store_commerce/app/locator.dart';
+import 'package:daza_store_commerce/features/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 void main() {
+  setupLocator();
   runApp(const MyApp());
 }
 
@@ -14,7 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Daza Store',
-      home: Scaffold(body: RootScreen()),
+      navigatorKey: StackedService.navigatorKey,
+      home: RootScreen(),
     );
   }
 }
@@ -34,7 +39,7 @@ class _RootScreenState extends State<RootScreen> {
     if (isLoggedIn) {
       return const Text('Homescreen');
     } else {
-      return const SignupView();
+      return const OnboardingView();
     }
   }
 }
