@@ -18,7 +18,7 @@ class SignupView extends StatelessWidget {
       viewModelBuilder: () => SignupViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          resizeToAvoidBottomInset: false,
+          // resizeToAvoidBottomInset: false,
           backgroundColor: Color(0xFFF6F6F6),
           body: SingleChildScrollView(
             child: SizedBox(

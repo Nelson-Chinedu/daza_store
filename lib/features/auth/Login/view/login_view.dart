@@ -18,7 +18,7 @@ class LoginView extends StatelessWidget {
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          resizeToAvoidBottomInset: false,
+          // resizeToAvoidBottomInset: false,
           backgroundColor: Color(0xFFF6F6F6),
           body: SingleChildScrollView(
             child: SizedBox(
@@ -121,7 +121,9 @@ class LoginView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  model.navigateToForgotPassword();
+                                },
                                 child: Text(
                                   'Forgot Password?',
                                   style: TextStyle(
