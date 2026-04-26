@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:daza_store_commerce/features/auth/Login/view/login_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
 import 'package:daza_store_commerce/shared/widgets/socials_auth/socials_auth_view.dart';
@@ -142,7 +140,7 @@ class LoginView extends StatelessWidget {
                             child: Button(
                               label: 'Sign In',
                               onPressed: () {
-                                log('sign');
+                                model.navigateToProfile();
                               },
                             ),
                           ),

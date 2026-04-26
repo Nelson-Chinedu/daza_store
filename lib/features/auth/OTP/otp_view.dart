@@ -13,7 +13,6 @@ class OtpView extends StatelessWidget {
       viewModelBuilder: () => OtpViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(

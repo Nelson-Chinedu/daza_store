@@ -12,7 +12,6 @@ class ForgotPasswordView extends StatelessWidget {
       viewModelBuilder: () => ForgotPasswordViewModel(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
