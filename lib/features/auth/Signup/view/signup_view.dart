@@ -147,7 +147,7 @@ class SignupView extends StatelessWidget {
                                   visualDensity: VisualDensity.compact,
                                   value: false,
                                   onChanged: (value) {
-                                    print(value);
+                                    log(value.toString());
                                   },
                                 ),
                               ),
