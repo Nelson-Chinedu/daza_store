@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Daza Store',
       navigatorKey: StackedService.navigatorKey,
+      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       home: RootScreen(),
     );
   }

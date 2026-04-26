@@ -19,7 +19,6 @@ class OnboardingView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor: Colors.white,
           // extendBodyBehindAppBar: true,
           appBar: model.isGettingStarted
               ? AppBar(
