@@ -27,7 +27,7 @@ class SignupView extends StatelessWidget {
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    height: height * 0.35,
+                    height: height * 0.45,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/images/bg-image.jpg'),
@@ -42,7 +42,7 @@ class SignupView extends StatelessWidget {
                   Center(
                     child: Column(
                       children: [
-                        const SizedBox(height: 90),
+                        const SizedBox(height: 160),
                         Text(
                           "Create Account",
                           style: TextStyle(
@@ -51,7 +51,7 @@ class SignupView extends StatelessWidget {
                             fontWeight: FontWeight.w800,
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 10),
                         Text(
                           "Fill your information below or register",
                           style: TextStyle(color: Colors.white, fontSize: 14),
@@ -65,7 +65,7 @@ class SignupView extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: 20,
+                    bottom: 50,
                     left: 30,
                     right: 30,
                     child: Container(
@@ -81,23 +81,6 @@ class SignupView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SocialAuth(dividerText: "Or sign up with"),
-                          Text('Name'),
-                          const SizedBox(height: 5),
-                          TextField(
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.next,
-                            decoration: InputDecoration(
-                              hintText: 'John Doe',
-                              hintStyle: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
                           Text('Email'),
                           const SizedBox(height: 5),
                           TextField(
