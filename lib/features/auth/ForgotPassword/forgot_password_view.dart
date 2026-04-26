@@ -125,7 +125,9 @@ class ForgotPasswordView extends StatelessWidget {
                             width: double.infinity,
                             child: Button(
                               label: 'Create New Password',
-                              onPressed: () {},
+                              onPressed: () {
+                                model.navigateToOTP();
+                              },
                             ),
                           ),
                         ],
