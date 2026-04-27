@@ -211,7 +211,9 @@ class ProfileView extends StatelessWidget {
                             width: double.infinity,
                             child: Button(
                               label: 'Complete Profile',
-                              onPressed: () {},
+                              onPressed: () {
+                                model.navigateToNotification();
+                              },
                             ),
                           ),
                           const SizedBox(height: 50),
