@@ -100,7 +100,12 @@ class OtpView extends StatelessWidget {
                           const SizedBox(height: 35),
                           SizedBox(
                             width: double.infinity,
-                            child: Button(label: 'Verify', onPressed: () {}),
+                            child: Button(
+                              label: 'Verify',
+                              onPressed: () {
+                                model.navigateToCreatePassword();
+                              },
+                            ),
                           ),
                         ],
                       ),

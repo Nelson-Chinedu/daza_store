@@ -1,15 +1,15 @@
-import 'package:daza_store_commerce/features/auth/ForgotPassword/forgot_password_viewmodel.dart';
+import 'package:daza_store_commerce/features/auth/CreatePassword/create_password_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class ForgotPasswordView extends StatelessWidget {
-  const ForgotPasswordView({super.key});
+class CreatePasswordView extends StatelessWidget {
+  const CreatePasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<ForgotPasswordViewModel>.reactive(
-      viewModelBuilder: () => ForgotPasswordViewModel(),
+    return ViewModelBuilder<CreatePasswordViewModel>.reactive(
+      viewModelBuilder: () => CreatePasswordViewModel(),
       builder: (context, model, child) {
         return Scaffold(
           body: SafeArea(
@@ -37,7 +37,7 @@ class ForgotPasswordView extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            'Forgot password?',
+                            'New Password',
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w600,
@@ -46,14 +46,14 @@ class ForgotPasswordView extends StatelessWidget {
                           ),
                           const SizedBox(height: 1),
                           Text(
-                            'Please enter your email address',
+                            'Your new password must be different',
                             style: TextStyle(
                               color: Color(0xFF242424),
                               fontSize: 15,
                             ),
                           ),
                           Text(
-                            'to reset your password.',
+                            'from previously used password.',
                             style: TextStyle(
                               color: Color(0xFF242424),
                               fontSize: 15,
@@ -63,19 +63,57 @@ class ForgotPasswordView extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Email'),
+                              Text('Password'),
                               const SizedBox(height: 5),
                               TextField(
-                                keyboardType: TextInputType.emailAddress,
+                                focusNode: model.passwordFocus,
+                                keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
+                                obscureText: true,
                                 decoration: InputDecoration(
-                                  hintText: 'john.doe@example.com',
+                                  hintText: '••••••••',
                                   hintStyle: TextStyle(
                                     fontSize: 14,
                                     color: Colors.grey,
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.visibility),
+                                  ),
+                                ),
+                                onSubmitted: (_) {
+                                  FocusScope.of(
+                                    context,
+                                  ).requestFocus(model.confirmPasswordFocus);
+                                },
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 25),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Confirm Password'),
+                              const SizedBox(height: 5),
+                              TextField(
+                                focusNode: model.confirmPasswordFocus,
+                                keyboardType: TextInputType.text,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  hintText: '••••••••',
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.visibility),
                                   ),
                                 ),
                               ),
@@ -85,9 +123,9 @@ class ForgotPasswordView extends StatelessWidget {
                           SizedBox(
                             width: double.infinity,
                             child: Button(
-                              label: 'Continue',
+                              label: 'Create New Password',
                               onPressed: () {
-                                model.navigateToOTP();
+                                model.navigateToSignIn();
                               },
                             ),
                           ),
