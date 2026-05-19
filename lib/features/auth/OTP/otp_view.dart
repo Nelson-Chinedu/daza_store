@@ -1,5 +1,6 @@
 import 'package:daza_store_commerce/features/auth/OTP/otp_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:stacked/stacked.dart';
@@ -49,14 +50,14 @@ class OtpView extends StatelessWidget {
                           Text(
                             'Enter the verification code we sent to',
                             style: TextStyle(
-                              color: Color(0xFF242424),
+                              color: BrandColors.dark,
                               fontSize: 15,
                             ),
                           ),
                           Text(
                             'example@email.com',
                             style: TextStyle(
-                              color: Color(0xFF401900),
+                              color: BrandColors.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
                             ),
@@ -91,9 +92,9 @@ class OtpView extends StatelessWidget {
                             child: Text(
                               'Resend Code',
                               style: TextStyle(
-                                color: Color(0xFFF8B057),
+                                color: BrandColors.secondary,
                                 decoration: TextDecoration.underline,
-                                decorationColor: Color(0xFFF8B057),
+                                decorationColor: BrandColors.secondary,
                               ),
                             ),
                           ),

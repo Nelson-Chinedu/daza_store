@@ -1,5 +1,6 @@
-import 'package:daza_store_commerce/features/profile/profile_viewmodel.dart';
+import 'package:daza_store_commerce/features/dashboard/profile/profile_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:stacked/stacked.dart';
@@ -49,14 +50,14 @@ class ProfileView extends StatelessWidget {
                           Text(
                             'Don\'t worry, only you can see your personal',
                             style: TextStyle(
-                              color: Color(0xFF242424),
+                              color: BrandColors.dark,
                               fontSize: 15,
                             ),
                           ),
                           Text(
                             'data. No one else will be able to see it.',
                             style: TextStyle(
-                              color: Color(0xFF242424),
+                              color: BrandColors.dark,
                               fontSize: 15,
                             ),
                           ),
@@ -80,7 +81,7 @@ class ProfileView extends StatelessWidget {
                                   height: 35,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Color(0xFF401900),
+                                    color: BrandColors.primary,
                                   ),
                                   child: Icon(
                                     Icons.edit_outlined,

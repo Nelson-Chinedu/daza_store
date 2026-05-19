@@ -1,5 +1,6 @@
 import 'package:daza_store_commerce/features/auth/CreatePassword/create_password_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -48,14 +49,14 @@ class CreatePasswordView extends StatelessWidget {
                           Text(
                             'Your new password must be different',
                             style: TextStyle(
-                              color: Color(0xFF242424),
+                              color: BrandColors.dark,
                               fontSize: 15,
                             ),
                           ),
                           Text(
                             'from previously used password.',
                             style: TextStyle(
-                              color: Color(0xFF242424),
+                              color: BrandColors.dark,
                               fontSize: 15,
                             ),
                           ),

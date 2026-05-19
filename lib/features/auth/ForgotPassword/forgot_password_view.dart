@@ -1,5 +1,6 @@
 import 'package:daza_store_commerce/features/auth/ForgotPassword/forgot_password_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -48,14 +49,14 @@ class ForgotPasswordView extends StatelessWidget {
                           Text(
                             'Please enter your email address',
                             style: TextStyle(
-                              color: Color(0xFF242424),
+                              color: BrandColors.dark,
                               fontSize: 15,
                             ),
                           ),
                           Text(
                             'to reset your password.',
                             style: TextStyle(
-                              color: Color(0xFF242424),
+                              color: BrandColors.dark,
                               fontSize: 15,
                             ),
                           ),

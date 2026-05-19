@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:daza_store_commerce/features/auth/Signup/view/signup_view.dart';
 import 'package:daza_store_commerce/features/onboarding/onboarding_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -29,7 +28,7 @@ class OnboardingView extends StatelessWidget {
                       child: Text(
                         'Skip',
                         style: TextStyle(
-                          color: Color(0xFFF8B057),
+                          color: BrandColors.secondary,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -87,7 +86,7 @@ class OnboardingView extends StatelessWidget {
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w400,
-                        color: const Color(0xFF401900),
+                        color: BrandColors.primary,
                       ),
                     ),
                   ],
@@ -103,7 +102,7 @@ class OnboardingView extends StatelessWidget {
                 child: Text(
                   "ummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 13, color: Color(0xFF242424)),
+                  style: TextStyle(fontSize: 13, color: BrandColors.dark),
                 ),
               ),
               const SizedBox(height: 40),
@@ -129,7 +128,7 @@ class OnboardingView extends StatelessWidget {
                         },
                       text: 'Sign In',
                       style: TextStyle(
-                        color: Color(0xFF401900),
+                        color: BrandColors.primary,
                         fontWeight: FontWeight.w500,
                         decoration: TextDecoration.underline,
                       ),
@@ -176,7 +175,7 @@ class OnboardingView extends StatelessWidget {
                         Text(
                           'Effortless Shopping',
                           style: TextStyle(
-                            color: Color(0xFF401900),
+                            color: BrandColors.primary,
                             fontSize: 25,
                             fontWeight: FontWeight.w500,
                           ),
@@ -227,7 +226,7 @@ class OnboardingView extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: 'Favorite Styles',
-                                style: TextStyle(color: Color(0xFF401900)),
+                                style: TextStyle(color: BrandColors.primary),
                               ),
                             ],
                           ),
@@ -268,7 +267,7 @@ class OnboardingView extends StatelessWidget {
                         Text(
                           'Fashion Delivered Fast',
                           style: TextStyle(
-                            color: Color(0xFF401900),
+                            color: BrandColors.primary,
                             fontSize: 25,
                             fontWeight: FontWeight.w500,
                           ),
@@ -305,7 +304,7 @@ class OnboardingView extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      color: Color(0xFF401900),
+                      color: BrandColors.primary,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -322,7 +321,7 @@ class OnboardingView extends StatelessWidget {
                 count: 3,
                 effect: WormEffect(
                   dotColor: Colors.amber.shade50,
-                  activeDotColor: Color(0xFFF8B057),
+                  activeDotColor: BrandColors.secondary,
                 ),
               ),
               Spacer(),
@@ -336,7 +335,7 @@ class OnboardingView extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Color(0xFF401900),
+                    color: BrandColors.primary,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(

@@ -1,11 +1,18 @@
 // import 'package:daza_store_commerce/features/auth/Login/view/login_view.dart';
 // import 'package:daza_store_commerce/features/auth/Signup/view/signup_view.dart';
 import 'package:daza_store_commerce/app/locator.dart';
+import 'package:daza_store_commerce/features/dashboard/dashboard_view.dart';
 import 'package:daza_store_commerce/features/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.light,
+  ); // this line handles the top area status bar (time, battery)
   setupLocator();
   runApp(const MyApp());
 }
@@ -38,7 +45,7 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     if (isLoggedIn) {
-      return const Text('Homescreen');
+      return const DashboardView();
     } else {
       return const OnboardingView();
     }
