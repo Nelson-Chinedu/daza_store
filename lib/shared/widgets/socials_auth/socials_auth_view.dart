@@ -1,3 +1,4 @@
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 
 class SocialAuth extends StatelessWidget {
@@ -15,7 +16,7 @@ class SocialAuth extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
-                border: Border.all(color: Color(0xFFE0E0E0)),
+                border: Border.all(color: BrandColors.lightGrey),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Image(
@@ -27,7 +28,7 @@ class SocialAuth extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
-                border: Border.all(color: Color(0xFFE0E0E0)),
+                border: Border.all(color: BrandColors.lightGrey),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Image(

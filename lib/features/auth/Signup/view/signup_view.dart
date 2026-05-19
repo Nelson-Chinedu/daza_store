@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:daza_store_commerce/features/auth/Signup/view/signup_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
 import 'package:daza_store_commerce/shared/widgets/socials_auth/socials_auth_view.dart';
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -19,7 +20,16 @@ class SignupView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           // resizeToAvoidBottomInset: false,
-          backgroundColor: Color(0xFFF6F6F6),
+          // extendBodyBehindAppBar: true,
+          // appBar: AppBar(
+          //   systemOverlayStyle: SystemUiOverlayStyle.light,
+          //   automaticallyImplyLeading: false,
+          //   elevation: 0,
+          //   // backgroundColor: Colors.white,
+          //   // backgroundColor: const Color(0xFF401900).withValues(alpha: 0.76),
+          //   backgroundColor: Colors.transparent,
+          // ),
+          backgroundColor: BrandColors.lighterGrey,
           body: SingleChildScrollView(
             child: SizedBox(
               height: height,
@@ -36,7 +46,7 @@ class SignupView extends StatelessWidget {
                       ),
                     ),
                     child: Container(
-                      color: const Color(0xFF401900).withValues(alpha: 0.76),
+                      color: BrandColors.primary.withValues(alpha: 0.76),
                     ),
                   ),
                   Center(
@@ -142,7 +152,7 @@ class SignupView extends StatelessWidget {
                                     TextSpan(
                                       text: ' Terms and Conditions',
                                       style: TextStyle(
-                                        color: Color(0xFFF8B057),
+                                        color: BrandColors.secondary,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w500,
                                         decoration: TextDecoration.underline,
@@ -175,7 +185,7 @@ class SignupView extends StatelessWidget {
                                       },
                                     text: 'Sign In',
                                     style: TextStyle(
-                                      color: Color(0xFFF8B057),
+                                      color: BrandColors.secondary,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
                                       decoration: TextDecoration.underline,

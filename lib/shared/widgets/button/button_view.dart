@@ -1,3 +1,4 @@
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
@@ -10,7 +11,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF401900),
+        backgroundColor: BrandColors.primary,
         padding: EdgeInsets.all(15),
       ),
       onPressed: () {

@@ -1,5 +1,6 @@
 import 'package:daza_store_commerce/features/notification/notification_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -55,9 +56,11 @@ class NotificationView extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        model.navigateToDashboard();
+                      },
                       style: TextButton.styleFrom(
-                        foregroundColor: Color(0xFFF8B057),
+                        foregroundColor: BrandColors.secondary,
                         textStyle: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
