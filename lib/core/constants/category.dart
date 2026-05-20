@@ -1,8 +1,8 @@
 class Category {
   final String name;
-  final String iconPath;
+  final String? iconPath;
 
-  const Category({required this.name, required this.iconPath});
+  const Category({required this.name, this.iconPath});
 }
 
 const List<Category> categories = [
@@ -12,3 +12,5 @@ const List<Category> categories = [
   Category(name: 'Pants', iconPath: 'assets/images/pants.png'),
   Category(name: 'Shoes', iconPath: 'assets/images/shoes.png'),
 ];
+
+final wishlistCategories = [Category(name: 'All'), ...categories];

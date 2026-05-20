@@ -1,4 +1,5 @@
 import 'package:daza_store_commerce/features/dashboard/home/home_view.dart';
+import 'package:daza_store_commerce/features/dashboard/wishlist/wishlist_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class DashboardView extends StatefulWidget {
 class _DashboardViewState extends State<DashboardView> {
   int currentIndex = 0;
 
-  final List<Widget> pages = [HomeView(), Text('welc')];
+  final List<Widget> pages = [HomeView(), Text('welc'), WishlistView()];
 
   @override
   Widget build(BuildContext context) {
