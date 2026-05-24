@@ -1,3 +1,4 @@
+import 'package:daza_store_commerce/features/dashboard/cart/cart_view.dart';
 import 'package:daza_store_commerce/features/dashboard/home/home_view.dart';
 import 'package:daza_store_commerce/features/dashboard/wishlist/wishlist_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
@@ -13,7 +14,11 @@ class DashboardView extends StatefulWidget {
 class _DashboardViewState extends State<DashboardView> {
   int currentIndex = 0;
 
-  final List<Widget> pages = [HomeView(), Text('welc'), WishlistView()];
+  final List<Widget> pages = [
+    HomeView(),
+    // CartView(),
+    WishlistView(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +40,30 @@ class _DashboardViewState extends State<DashboardView> {
                     filled: Icons.home,
                     index: 0,
                   ),
-                  _navItem(
-                    outlined: Icons.shopping_bag_outlined,
-                    filled: Icons.shopping_bag,
-                    index: 1,
+                  // _navItem(
+                  //   outlined: Icons.shopping_bag_outlined,
+                  //   filled: Icons.shopping_bag,
+                  //   index: 1,
+                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => CartView()),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade800,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Icon(
+                        Icons.shopping_bag_outlined,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
                   ),
                   _navItem(
                     outlined: Icons.favorite_outline,
