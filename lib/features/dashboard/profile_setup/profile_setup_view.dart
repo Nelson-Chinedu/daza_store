@@ -1,17 +1,17 @@
-import 'package:daza_store_commerce/features/dashboard/profile/profile_viewmodel.dart';
+import 'package:daza_store_commerce/features/dashboard/profile_setup/profile_setup_viewmodel.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:stacked/stacked.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+class ProfileSetupView extends StatelessWidget {
+  const ProfileSetupView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<ProfileViewModel>.reactive(
-      viewModelBuilder: () => ProfileViewModel(),
+    return ViewModelBuilder<ProfileSetupViewModel>.reactive(
+      viewModelBuilder: () => ProfileSetupViewModel(),
       builder: (context, model, child) {
         return Scaffold(
           body: SafeArea(

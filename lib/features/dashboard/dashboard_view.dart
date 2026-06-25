@@ -1,3 +1,4 @@
+import 'package:daza_store_commerce/features/dashboard/account_view/account_view.dart';
 import 'package:daza_store_commerce/features/dashboard/cart/cart_view.dart';
 import 'package:daza_store_commerce/features/dashboard/home/home_view.dart';
 import 'package:daza_store_commerce/features/dashboard/wishlist/wishlist_view.dart';
@@ -16,8 +17,10 @@ class _DashboardViewState extends State<DashboardView> {
 
   final List<Widget> pages = [
     HomeView(),
-    // CartView(),
+    CartView(),
     WishlistView(),
+    HomeView(),
+    AccountView(),
   ];
 
   @override
