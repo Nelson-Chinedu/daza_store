@@ -1,4 +1,6 @@
 import 'package:daza_store_commerce/features/dashboard/cart/cart_viewmodel.dart';
+import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
+import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:stacked/stacked.dart';
@@ -56,7 +58,14 @@ class CartView extends StatelessWidget {
                             extentRatio: 0.22,
                             children: [
                               SlidableAction(
-                                onPressed: (_) => model.removeItem(index),
+                                onPressed: (context) {
+                                  deleteModal(
+                                    context: context,
+                                    model: model,
+                                    index: index,
+                                    item: item,
+                                  );
+                                },
                                 backgroundColor: const Color(0xFFD65A5A),
                                 icon: Icons.delete_outline,
                                 foregroundColor: Colors.white,
@@ -67,7 +76,6 @@ class CartView extends StatelessWidget {
                               ),
                             ],
                           ),
-
                           child: Builder(
                             builder: (context) {
                               return GestureDetector(
@@ -133,6 +141,116 @@ class CartView extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future deleteModal({
+    required BuildContext context,
+    required CartViewModel model,
+    required int index,
+    required String item,
+  }) {
+    final height = MediaQuery.of(context).size.height * 0.35;
+    return showModalBottomSheet(
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) {
+        return Container(
+          height: height,
+          padding: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
+          child: Column(
+            children: [
+              Text(
+                'Remove from Cart?',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.all(8),
+                // height: 10,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: BoxBorder.all(color: BrandColors.lightGrey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 10,
+                  children: [
+                    Container(
+                      height: 90,
+                      width: 90,
+                      decoration: BoxDecoration(
+                        color: BrandColors.lightGrey,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    SizedBox(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 6,
+                        children: [
+                          Text(
+                            item,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            'Coats',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: BrandColors.grey,
+                            ),
+                          ),
+
+                          Row(
+                            children: [
+                              Text(
+                                '₦80.00',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                '₦100.00',
+                                style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: BrandColors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Row(
+                spacing: 5,
+                children: [
+                  Expanded(
+                    child: Button(label: 'Cancel', onPressed: () {}),
+                  ),
+                  Expanded(
+                    child: Button(
+                      label: 'Yes, Remove',
+                      onPressed: () {
+                        Navigator.pop(context);
+                        model.removeItem(index);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
     );
   }
 }
