@@ -3,6 +3,7 @@ import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
 class CartView extends StatelessWidget {
@@ -41,150 +42,176 @@ class CartView extends StatelessWidget {
             bottom: false,
             child: Column(
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    child: SlidableAutoCloseBehavior(
-                      child: SlidableAutoCloseBehavior(
-                        child: ListView.builder(
-                          itemCount: model.items.length,
-                          itemBuilder: (context, index) {
-                            final item = model.items[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 10.0),
-                              child: Slidable(
-                                key: ValueKey(item),
-                                endActionPane: ActionPane(
-                                  motion: const BehindMotion(),
-                                  extentRatio: 0.22,
-                                  children: [
-                                    SlidableAction(
-                                      onPressed: (context) {
-                                        deleteModal(
-                                          context: context,
-                                          model: model,
-                                          index: index,
-                                          item: item,
-                                        );
-                                      },
-                                      backgroundColor: const Color(0xFFD65A5A),
-                                      icon: Icons.delete_outline,
-                                      foregroundColor: Colors.white,
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(20),
-                                        bottomRight: Radius.circular(20),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                child: Builder(
-                                  builder: (context) {
-                                    return GestureDetector(
-                                      onTap: () =>
-                                          Slidable.of(context)?.close(),
-                                      child: Column(
-                                        children: [cartItem(itemName: item)],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            );
-                          },
+                if (model.cartItems.isEmpty) ...[
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    child: Center(
+                      child: Text(
+                        'Your cart is empty',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: BrandColors.grey,
                         ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(20),
-                  width: double.infinity,
-                  // height: 300,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    border: BoxBorder.all(color: BrandColors.lightGrey),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.02),
-                        blurRadius: 12,
-                        spreadRadius: 2,
-                        offset: const Offset(
-                          0,
-                          -2,
-                        ), // Shadow above the container
+                ] else ...[
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
                       ),
-                    ],
+                      child: SlidableAutoCloseBehavior(
+                        child: SlidableAutoCloseBehavior(
+                          child: ListView.builder(
+                            itemCount: model.cartItems.length,
+                            itemBuilder: (context, index) {
+                              final item = model.cartItems[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 10.0),
+                                child: Slidable(
+                                  key: ValueKey(item),
+                                  endActionPane: ActionPane(
+                                    motion: const BehindMotion(),
+                                    extentRatio: 0.22,
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          deleteModal(
+                                            context: context,
+                                            model: model,
+                                            index: index,
+                                            item: item,
+                                          );
+                                        },
+                                        backgroundColor: const Color(
+                                          0xFFD65A5A,
+                                        ),
+                                        icon: Icons.delete_outline,
+                                        foregroundColor: Colors.white,
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                          bottomRight: Radius.circular(20),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Builder(
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () =>
+                                            Slidable.of(context)?.close(),
+                                        child: Column(
+                                          children: [cartItem(item, model)],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Column(
-                    spacing: 10,
-                    children: [
-                      Stack(
+                  if (model.cartItems.isNotEmpty) ...[
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      width: double.infinity,
+                      // height: 300,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                        border: BoxBorder.all(color: BrandColors.lightGrey),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.02),
+                            blurRadius: 12,
+                            spreadRadius: 2,
+                            offset: const Offset(
+                              0,
+                              -2,
+                            ), // Shadow above the container
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        spacing: 10,
                         children: [
-                          TextField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: BrandColors.lighterGrey,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(100),
-                                borderSide: BorderSide.none,
+                          Stack(
+                            children: [
+                              TextField(
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: BrandColors.lighterGrey,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  contentPadding: EdgeInsets.all(12),
+                                  hintText: 'Promo Code',
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                               ),
-                              contentPadding: EdgeInsets.all(12),
-                              hintText: 'Promo Code',
-                              hintStyle: TextStyle(
-                                fontSize: 14,
+                              Positioned(
+                                right: 0,
+                                top: 0,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 0,
+                                    vertical: 0,
+                                  ),
+                                  child: Button(
+                                    label: 'Apply',
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          rowItems(title: 'Sub-Total', amount: 'N3000'),
+                          rowItems(title: 'Delivery Charge', amount: 'N30'),
+                          rowItems(title: 'Tax', amount: 'N30'),
+                          rowItems(title: 'Discount', amount: 'N30'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(
+                              20,
+                              (index) => Container(
+                                width: 8,
+                                height: 1,
                                 color: Colors.grey,
                               ),
                             ),
                           ),
-                          Positioned(
-                            right: 0,
-                            top: 0,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 0,
-                                vertical: 0,
-                              ),
-                              child: Button(label: 'Apply', onPressed: () {}),
+                          rowItems(
+                            title: 'Total Cost',
+                            amount: model.formattedTotalCartPrice,
+                          ),
+                          const SizedBox(height: 10),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Button(
+                              label: 'Proceed to Checkout',
+                              onPressed: () {},
                             ),
                           ),
+                          const SizedBox(height: 10),
                         ],
                       ),
-                      rowItems(title: 'Sub-Total', amount: 'N3000'),
-                      rowItems(title: 'Delivery Charge', amount: 'N30'),
-                      rowItems(title: 'Tax', amount: 'N30'),
-                      rowItems(title: 'Discount', amount: 'N30'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: List.generate(
-                          20,
-                          (index) => Container(
-                            width: 8,
-                            height: 1,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      rowItems(title: 'Total Cost', amount: 'N30'),
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Button(
-                          label: 'Proceed to Checkout',
-                          onPressed: () {},
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
+                    ),
+                  ],
+                ],
               ],
             ),
           ),
@@ -193,7 +220,7 @@ class CartView extends StatelessWidget {
     );
   }
 
-  Widget cartItem({required String itemName}) {
+  Widget cartItem(Map<String, dynamic> item, CartViewModel model) {
     return Container(
       padding: const EdgeInsets.all(10),
       width: double.infinity,
@@ -216,17 +243,92 @@ class CartView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(itemName, style: TextStyle(fontWeight: FontWeight.w600)),
+                Text(
+                  item['product_name'],
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
                 SizedBox(height: 5),
-                Text('Dress', style: TextStyle(color: Colors.black45)),
+                Text(item['category'], style: TextStyle(color: Colors.black45)),
                 SizedBox(height: 5),
                 Row(
                   children: [
-                    Text('₦80.00'),
-                    SizedBox(width: 10),
-                    Text(
-                      '₦100.00',
-                      style: TextStyle(decoration: TextDecoration.lineThrough),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            'N${NumberFormat("#,##0", "en_US").format(item['new_price'])}',
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            'N${NumberFormat("#,##0", "en_US").format(item['old_price'])}',
+                            style: TextStyle(
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        color: BrandColors.lighterGrey,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        spacing: 5,
+                        children: [
+                          GestureDetector(
+                            onTap: () => model.decreaseQuantity(item['id']),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 2,
+                                horizontal: 7,
+                              ),
+                              decoration: BoxDecoration(
+                                color: item['qty'] == 1
+                                    ? Colors.white10
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                '-',
+                                style: TextStyle(
+                                  color: item['qty'] == 1
+                                      ? Colors.grey.shade400
+                                      : BrandColors.primary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Text(model.cartItems[item['id']]['qty'].toString()),
+                          Text(item['qty'].toString()),
+                          GestureDetector(
+                            onTap: () => model.increaseQuantity(item['id']),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 2,
+                                horizontal: 7,
+                              ),
+                              decoration: BoxDecoration(
+                                color: BrandColors.primary,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                '+',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -238,7 +340,7 @@ class CartView extends StatelessWidget {
     );
   }
 
-  Widget rowItems({required String title, required String amount}) {
+  Widget rowItems({required String title, required dynamic amount}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -255,7 +357,7 @@ class CartView extends StatelessWidget {
     required BuildContext context,
     required CartViewModel model,
     required int index,
-    required String item,
+    required Map<String, dynamic> item,
   }) {
     final height = MediaQuery.of(context).size.height * 0.35;
     return showModalBottomSheet(
@@ -298,14 +400,14 @@ class CartView extends StatelessWidget {
                         spacing: 6,
                         children: [
                           Text(
-                            item,
+                            item['product_name'],
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            'Coats',
+                            item['category'],
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -316,12 +418,12 @@ class CartView extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '₦80.00',
+                                '₦${NumberFormat("#,##0", "en_US").format(item['new_price'])}',
                                 style: TextStyle(fontWeight: FontWeight.w500),
                               ),
                               SizedBox(width: 10),
                               Text(
-                                '₦100.00',
+                                '₦${NumberFormat("#,##0", "en_US").format(item['old_price'])}',
                                 style: TextStyle(
                                   decoration: TextDecoration.lineThrough,
                                   color: BrandColors.grey,
@@ -347,7 +449,7 @@ class CartView extends StatelessWidget {
                       label: 'Yes, Remove',
                       onPressed: () {
                         Navigator.pop(context);
-                        model.removeItem(index);
+                        model.removeItem(item['id']);
                       },
                     ),
                   ),
