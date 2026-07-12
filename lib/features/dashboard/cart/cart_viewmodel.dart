@@ -1,3 +1,4 @@
+import 'package:daza_store_commerce/features/dashboard/checkout/checkout_view.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -89,6 +90,10 @@ class CartViewModel extends ReactiveViewModel {
 
   String get formattedTotalCartPrice {
     return 'N${NumberFormat("#,##0", "en_US").format(totalCartPrice)}';
+  }
+
+  void proceedToCheckout() {
+    NavigationService().navigateToView(CheckoutView());
   }
 
   @override

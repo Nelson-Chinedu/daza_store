@@ -104,7 +104,9 @@ class CartView extends StatelessWidget {
                                         onTap: () =>
                                             Slidable.of(context)?.close(),
                                         child: Column(
-                                          children: [cartItem(item, model)],
+                                          children: [
+                                            _CartItem(item: item, model: model),
+                                          ],
                                         ),
                                       );
                                     },
@@ -117,100 +119,7 @@ class CartView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (model.cartItems.isNotEmpty) ...[
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      width: double.infinity,
-                      // height: 300,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                        border: BoxBorder.all(color: BrandColors.lightGrey),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.02),
-                            blurRadius: 12,
-                            spreadRadius: 2,
-                            offset: const Offset(
-                              0,
-                              -2,
-                            ), // Shadow above the container
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        spacing: 10,
-                        children: [
-                          Stack(
-                            children: [
-                              TextField(
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: BrandColors.lighterGrey,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  contentPadding: EdgeInsets.all(12),
-                                  hintText: 'Promo Code',
-                                  hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                right: 0,
-                                top: 0,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 0,
-                                    vertical: 0,
-                                  ),
-                                  child: Button(
-                                    label: 'Apply',
-                                    onPressed: () {},
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          rowItems(title: 'Sub-Total', amount: 'N3000'),
-                          rowItems(title: 'Delivery Charge', amount: 'N30'),
-                          rowItems(title: 'Tax', amount: 'N30'),
-                          rowItems(title: 'Discount', amount: 'N30'),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(
-                              20,
-                              (index) => Container(
-                                width: 8,
-                                height: 1,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
-                          rowItems(
-                            title: 'Total Cost',
-                            amount: model.formattedTotalCartPrice,
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: double.infinity,
-                            child: Button(
-                              label: 'Proceed to Checkout',
-                              onPressed: () {},
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                    ),
-                  ],
+                  if (model.cartItems.isNotEmpty) _CartCharge(model: model),
                 ],
               ],
             ),
@@ -220,7 +129,146 @@ class CartView extends StatelessWidget {
     );
   }
 
-  Widget cartItem(Map<String, dynamic> item, CartViewModel model) {
+  Future deleteModal({
+    required BuildContext context,
+    required CartViewModel model,
+    required int index,
+    required Map<String, dynamic> item,
+  }) {
+    final height = MediaQuery.of(context).size.height * 0.35;
+    return showModalBottomSheet(
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) {
+        return Container(
+          height: height,
+          padding: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
+          child: Column(
+            children: [
+              Text(
+                'Remove from Cart?',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.all(8),
+                // height: 10,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: BoxBorder.all(color: BrandColors.lightGrey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 10,
+                  children: [
+                    Container(
+                      height: 90,
+                      width: 90,
+                      decoration: BoxDecoration(
+                        color: BrandColors.lightGrey,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    SizedBox(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 6,
+                        children: [
+                          Text(
+                            item['product_name'],
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            item['category'],
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: BrandColors.grey,
+                            ),
+                          ),
+
+                          Row(
+                            children: [
+                              Text(
+                                '₦${NumberFormat("#,##0", "en_US").format(item['new_price'])}',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                '₦${NumberFormat("#,##0", "en_US").format(item['old_price'])}',
+                                style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: BrandColors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Row(
+                spacing: 5,
+                children: [
+                  Expanded(
+                    child: Button(label: 'Cancel', onPressed: () {}),
+                  ),
+                  Expanded(
+                    child: Button(
+                      label: 'Yes, Remove',
+                      onPressed: () {
+                        Navigator.pop(context);
+                        model.removeItem(item['id']);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _RowItems extends StatelessWidget {
+  final String title;
+  final dynamic amount;
+
+  const _RowItems({required this.title, required this.amount});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title, style: TextStyle(color: BrandColors.grey, fontSize: 12)),
+        Text(
+          '$amount',
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+        ),
+      ],
+    );
+  }
+}
+
+class _CartItem extends StatelessWidget {
+  final Map<String, dynamic> item;
+  final CartViewModel model;
+
+  const _CartItem({required this.item, required this.model});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       width: double.infinity,
@@ -339,127 +387,95 @@ class CartView extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget rowItems({required String title, required dynamic amount}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title, style: TextStyle(color: BrandColors.grey, fontSize: 12)),
-        Text(
-          amount,
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-        ),
-      ],
-    );
-  }
+class _CartCharge extends StatelessWidget {
+  final CartViewModel model;
+  const _CartCharge({required this.model});
 
-  Future deleteModal({
-    required BuildContext context,
-    required CartViewModel model,
-    required int index,
-    required Map<String, dynamic> item,
-  }) {
-    final height = MediaQuery.of(context).size.height * 0.35;
-    return showModalBottomSheet(
-      backgroundColor: Colors.white,
-      context: context,
-      builder: (context) {
-        return Container(
-          height: height,
-          padding: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
-          child: Column(
-            children: [
-              Text(
-                'Remove from Cart?',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                padding: EdgeInsets.all(8),
-                // height: 10,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  border: BoxBorder.all(color: BrandColors.lightGrey),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 10,
-                  children: [
-                    Container(
-                      height: 90,
-                      width: 90,
-                      decoration: BoxDecoration(
-                        color: BrandColors.lightGrey,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    SizedBox(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 6,
-                        children: [
-                          Text(
-                            item['product_name'],
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            item['category'],
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: BrandColors.grey,
-                            ),
-                          ),
-
-                          Row(
-                            children: [
-                              Text(
-                                '₦${NumberFormat("#,##0", "en_US").format(item['new_price'])}',
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                '₦${NumberFormat("#,##0", "en_US").format(item['old_price'])}',
-                                style: TextStyle(
-                                  decoration: TextDecoration.lineThrough,
-                                  color: BrandColors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(),
-              Row(
-                spacing: 5,
-                children: [
-                  Expanded(
-                    child: Button(label: 'Cancel', onPressed: () {}),
-                  ),
-                  Expanded(
-                    child: Button(
-                      label: 'Yes, Remove',
-                      onPressed: () {
-                        Navigator.pop(context);
-                        model.removeItem(item['id']);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-            ],
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Container(
+        padding: EdgeInsets.all(20),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-        );
-      },
+          border: BoxBorder.all(color: BrandColors.lightGrey),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 12,
+              spreadRadius: 2,
+              offset: const Offset(0, -2), // Shadow above the container
+            ),
+          ],
+        ),
+        child: Column(
+          spacing: 10,
+          children: [
+            Stack(
+              children: [
+                TextField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: BrandColors.lighterGrey,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: EdgeInsets.all(12),
+                    hintText: 'Promo Code',
+                    hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 0,
+                    ),
+                    child: Button(label: 'Apply', onPressed: () {}),
+                  ),
+                ),
+              ],
+            ),
+            _RowItems(title: 'Sub-Total', amount: 'N3000'),
+            _RowItems(title: 'Delivery Charge', amount: 'N30'),
+            _RowItems(title: 'Tax', amount: 'N30'),
+            _RowItems(title: 'Discount', amount: 'N30'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(
+                20,
+                (index) => Container(width: 8, height: 1, color: Colors.grey),
+              ),
+            ),
+            _RowItems(
+              title: 'Total Cost',
+              amount: model.formattedTotalCartPrice,
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              child: Button(
+                label: 'Proceed to Checkout',
+                onPressed: () {
+                  model.proceedToCheckout();
+                },
+              ),
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
+      ),
     );
   }
 }
