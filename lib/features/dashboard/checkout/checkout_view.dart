@@ -99,7 +99,12 @@ class CheckoutView extends StatelessWidget {
             ),
             child: SizedBox(
               width: double.infinity,
-              child: Button(label: 'Continue to Payment', onPressed: () {}),
+              child: Button(
+                label: 'Continue to Payment',
+                onPressed: () {
+                  model.goToPayment();
+                },
+              ),
             ),
           ),
         );
