@@ -52,7 +52,9 @@ class CheckoutView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 5),
-                    _SummaryCard(),
+                    _SummaryCard(
+                      onTap: () => model.changeCheckout('shipping_address'),
+                    ),
                     const SizedBox(height: 20),
                     Text(
                       'Choose Shipping Type',
@@ -62,7 +64,9 @@ class CheckoutView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 5),
-                    _SummaryCard(),
+                    _SummaryCard(
+                      onTap: () => model.changeCheckout('shipping_type'),
+                    ),
                     const SizedBox(height: 20),
                     Text(
                       'Order List',
@@ -105,6 +109,10 @@ class CheckoutView extends StatelessWidget {
 }
 
 class _SummaryCard extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const _SummaryCard({required this.onTap});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -148,7 +156,10 @@ class _SummaryCard extends StatelessWidget {
               ],
             ),
           ),
-          Text('CHANGE', style: TextStyle(fontSize: 10)),
+          GestureDetector(
+            onTap: () => onTap(),
+            child: Text('CHANGE', style: TextStyle(fontSize: 10)),
+          ),
         ],
       ),
     );
