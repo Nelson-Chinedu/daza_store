@@ -92,7 +92,12 @@ class PaymentMethodView extends StatelessWidget {
           ),
           child: SizedBox(
             width: double.infinity,
-            child: Button(label: 'Confirm Payment', onPressed: () {}),
+            child: Button(
+              label: 'Confirm Payment',
+              onPressed: () {
+                model.confirmPayment();
+              },
+            ),
           ),
         ),
       ),
