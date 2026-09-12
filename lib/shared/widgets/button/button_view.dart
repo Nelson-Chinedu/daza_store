@@ -4,8 +4,16 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
+  final IconData? icon;
+  final double? iconSize;
 
-  const Button({super.key, required this.label, this.onPressed});
+  const Button({
+    super.key,
+    required this.label,
+    this.onPressed,
+    this.icon,
+    this.iconSize,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +25,15 @@ class Button extends StatelessWidget {
       onPressed: () {
         onPressed!();
       },
-      child: Text(label, style: TextStyle(color: Colors.white)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 10,
+        children: [
+          if (icon != null)
+            Icon(icon, color: Colors.white, size: iconSize ?? 25),
+          Text(label, style: TextStyle(color: Colors.white)),
+        ],
+      ),
     );
   }
 }
