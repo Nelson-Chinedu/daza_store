@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daza_store_commerce/core/constants/category.dart';
 import 'package:daza_store_commerce/features/dashboard/home/home_viewmodel.dart';
+import 'package:daza_store_commerce/features/dashboard/product/product_view.dart';
 import 'package:daza_store_commerce/features/dashboard/product_detail/product_detail_view.dart';
+import 'package:daza_store_commerce/features/dashboard/products/products_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -126,23 +128,13 @@ class HomeView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Special Offers',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'See all',
-                  style: TextStyle(color: BrandColors.secondary),
-                ),
-              ),
-            ],
+          Text(
+            'Special Offers',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
+          const SizedBox(height: 5),
           CarouselSlider(
             options: CarouselOptions(
               height: 150.0,
@@ -251,7 +243,9 @@ class HomeView extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  NavigationService().navigateToView(ProductsView());
+                },
                 child: Text(
                   'See all',
                   style: TextStyle(color: BrandColors.secondary),
@@ -266,20 +260,19 @@ class HomeView extends StatelessWidget {
             itemCount: 4,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 0.8,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+              childAspectRatio: 0.7,
             ),
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () => NavigationService().navigateToView(
                   ProductDetailView(productId: 1),
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                child: ProductView(
+                  productId: index,
+                  isFavourite: model.isFavourite(index),
+                  onTap: () => model.toggleFavourite(index),
                 ),
               );
             },
