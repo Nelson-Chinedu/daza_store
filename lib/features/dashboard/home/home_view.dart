@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daza_store_commerce/core/constants/category.dart';
 import 'package:daza_store_commerce/features/dashboard/home/home_viewmodel.dart';
+import 'package:daza_store_commerce/features/dashboard/product_detail/product_detail_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -258,35 +260,29 @@ class HomeView extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          Column(
-            spacing: 20,
-            children: List.generate(2, (index) {
-              return Row(
-                spacing: 15,
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      height: 250,
-                      width: 250,
-                    ),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 4,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 0.8,
+            ),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () => NavigationService().navigateToView(
+                  ProductDetailView(productId: 1),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      height: 250,
-                      width: 250,
-                    ),
-                  ),
-                ],
+                ),
               );
-            }),
+            },
           ),
         ],
       ),
