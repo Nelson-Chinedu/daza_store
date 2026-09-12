@@ -1,6 +1,7 @@
 import 'package:daza_store_commerce/features/dashboard/account_view/account_view.dart';
 import 'package:daza_store_commerce/features/dashboard/cart/cart_view.dart';
 import 'package:daza_store_commerce/features/dashboard/home/home_view.dart';
+import 'package:daza_store_commerce/features/dashboard/orders/orders_view.dart';
 import 'package:daza_store_commerce/features/dashboard/wishlist/wishlist_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _DashboardViewState extends State<DashboardView> {
     HomeView(),
     CartView(),
     WishlistView(),
-    HomeView(),
+    OrdersView(),
     AccountView(),
   ];
 
@@ -74,8 +75,8 @@ class _DashboardViewState extends State<DashboardView> {
                     index: 2,
                   ),
                   _navItem(
-                    outlined: Icons.message_outlined,
-                    filled: Icons.message,
+                    outlined: Icons.local_shipping_outlined,
+                    filled: Icons.local_shipping,
                     index: 3,
                   ),
                   _navItem(

@@ -21,6 +21,7 @@ class WishlistView extends StatelessWidget {
               'My Wishlist',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
+            automaticallyImplyLeading: false,
             actions: [
               Container(
                 padding: EdgeInsets.all(6),
