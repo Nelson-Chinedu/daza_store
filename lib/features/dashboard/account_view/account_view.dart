@@ -17,24 +17,9 @@ class AccountView extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  const SizedBox(height: 20),
                   Stack(
                     children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Icon(Icons.arrow_back_ios_sharp, size: 20),
-                            ),
-                          ),
-                        ),
-                      ),
                       Center(
                         child: Text(
                           'Profile',
@@ -46,6 +31,7 @@ class AccountView extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20),
                   Stack(
                     children: [
                       Container(
