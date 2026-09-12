@@ -1,18 +1,12 @@
 import 'package:stacked/stacked.dart';
 
-class HomeViewmodel extends ReactiveViewModel {
-  int currentIndex = 0;
+class ProductsViewmodel extends ReactiveViewModel {
   int selectedCategoryIndex = 0;
 
   final List<int> _favourites = [];
   List<int> get favourites => List.unmodifiable(_favourites);
 
   bool isFavourite(int item) => _favourites.contains(item);
-
-  void updateIndex(int index) {
-    currentIndex = index;
-    notifyListeners();
-  }
 
   void selectedCategory(int index) {
     selectedCategoryIndex = index;

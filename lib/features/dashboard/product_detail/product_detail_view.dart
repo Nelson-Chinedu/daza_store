@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:daza_store_commerce/features/dashboard/product_detail/product_detail_viewmodel.dart';
 import 'package:daza_store_commerce/helpers/colorParser.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:stacked/stacked.dart';
 
 class ProductDetailView extends StatelessWidget {
@@ -75,8 +77,29 @@ class ProductDetailView extends StatelessWidget {
                 Expanded(
                   child: Container(
                     alignment: Alignment.bottomCenter,
-                    child: Image.network(
-                      'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_t.png',
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png',
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.contain,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          color: Colors.white,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        color: Colors.grey[200],
+                        child: const Icon(
+                          Icons.broken_image,
+                          color: Colors.grey,
+                          size: 32,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -229,8 +252,8 @@ class ProductDetailView extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: 55,
+                  height: 55,
                   decoration: BoxDecoration(shape: BoxShape.circle),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),

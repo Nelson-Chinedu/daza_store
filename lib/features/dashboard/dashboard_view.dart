@@ -29,7 +29,7 @@ class _DashboardViewState extends State<DashboardView> {
       body: pages[currentIndex],
       bottomNavigationBar: SafeArea(
         child: Container(
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.only(left: 20, right: 20),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25),
             child: Container(

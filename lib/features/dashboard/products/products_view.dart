@@ -1,24 +1,22 @@
 import 'package:daza_store_commerce/core/constants/category.dart';
 import 'package:daza_store_commerce/features/dashboard/product/product_view.dart';
-import 'package:daza_store_commerce/features/dashboard/product_detail/product_detail_view.dart';
-import 'package:daza_store_commerce/features/dashboard/wishlist/wishlist_viewmodel.dart';
+import 'package:daza_store_commerce/features/dashboard/products/products_viewmodel.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
-class WishlistView extends StatelessWidget {
-  const WishlistView({super.key});
+class ProductsView extends StatelessWidget {
+  const ProductsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<WishlistViewmodel>.reactive(
-      viewModelBuilder: () => WishlistViewmodel(),
+    return ViewModelBuilder<ProductsViewmodel>.reactive(
+      viewModelBuilder: () => ProductsViewmodel(),
       builder: (context, model, child) {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'My Wishlist',
+              'Products',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             actions: [
@@ -70,15 +68,10 @@ class WishlistView extends StatelessWidget {
                             childAspectRatio: 0.7,
                           ),
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () => NavigationService().navigateToView(
-                            ProductDetailView(productId: 1),
-                          ),
-                          child: ProductView(
-                            productId: index,
-                            isFavourite: model.isFavourite(index),
-                            onTap: () => model.toggleFavourite(index),
-                          ),
+                        return ProductView(
+                          productId: index,
+                          isFavourite: model.isFavourite(index),
+                          onTap: () => model.toggleFavourite(index),
                         );
                       },
                     ),
@@ -92,7 +85,7 @@ class WishlistView extends StatelessWidget {
     );
   }
 
-  Widget _categoryItem(WishlistViewmodel model, dynamic category, int index) {
+  _categoryItem(ProductsViewmodel model, dynamic category, int index) {
     return GestureDetector(
       onTap: () {
         model.selectedCategory(index);
