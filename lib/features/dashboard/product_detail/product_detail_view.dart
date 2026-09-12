@@ -252,8 +252,8 @@ class ProductDetailView extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: 55,
+                  height: 55,
                   decoration: BoxDecoration(shape: BoxShape.circle),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
