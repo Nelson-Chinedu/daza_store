@@ -75,8 +75,8 @@ class _DashboardViewState extends State<DashboardView> {
                     index: 2,
                   ),
                   _navItem(
-                    outlined: Icons.message_outlined,
-                    filled: Icons.message,
+                    outlined: Icons.local_shipping_outlined,
+                    filled: Icons.local_shipping,
                     index: 3,
                   ),
                   _navItem(
