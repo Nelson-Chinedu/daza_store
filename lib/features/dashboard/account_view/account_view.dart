@@ -1,7 +1,10 @@
 import 'package:daza_store_commerce/features/dashboard/account_view/account_viewmodel.dart';
+import 'package:daza_store_commerce/features/dashboard/orders/orders_view.dart';
+import 'package:daza_store_commerce/features/dashboard/payment_method/payment_method_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class AccountView extends StatelessWidget {
   const AccountView({super.key});
@@ -82,11 +85,15 @@ class AccountView extends StatelessWidget {
                     name: 'Payment Methods',
                     path: '',
                     icon: Icons.payment,
+                    onTap: () =>
+                        NavigationService().navigateToView(PaymentMethodView()),
                   ),
                   accountSetup(
                     name: 'My Orders',
                     path: '',
                     icon: Icons.shopping_bag,
+                    onTap: () =>
+                        NavigationService().navigateToView(OrdersView()),
                   ),
                   accountSetup(
                     name: 'My Coupons',
@@ -112,37 +119,45 @@ class AccountView extends StatelessWidget {
     required String name,
     required dynamic icon,
     required String path,
+    VoidCallback? onTap,
   }) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 0.5, color: BrandColors.lightGrey),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              spacing: 14,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: BrandColors.lightGrey.withValues(alpha: 0.4),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(icon, color: BrandColors.grey),
-                ),
-                Text(
-                  name,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 0.5, color: BrandColors.lightGrey),
           ),
-          Icon(Icons.arrow_forward_ios, color: BrandColors.secondary, size: 20),
-        ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Row(
+                spacing: 14,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: BrandColors.lightGrey.withValues(alpha: 0.4),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(icon, color: BrandColors.grey),
+                  ),
+                  Text(
+                    name,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: BrandColors.secondary,
+              size: 20,
+            ),
+          ],
+        ),
       ),
     );
   }

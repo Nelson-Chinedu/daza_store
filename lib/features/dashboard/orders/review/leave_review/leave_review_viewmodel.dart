@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class OrdersViewmodel extends ReactiveViewModel {
+class LeaveReviewViewmodel extends ReactiveViewModel {
   void setup() {}
 
   void goBack() {
