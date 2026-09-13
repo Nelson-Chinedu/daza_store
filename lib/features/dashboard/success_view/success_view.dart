@@ -49,6 +49,19 @@ class SuccessView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 10,
                 children: [
+                  Container(
+                    width: 90,
+                    height: 90,
+                    decoration: const BoxDecoration(
+                      color: BrandColors.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.check_rounded,
+                      color: Colors.white,
+                      size: 48,
+                    ),
+                  ),
                   Text(
                     title,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -90,7 +103,7 @@ class SuccessView extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Button(
-                    label: 'View',
+                    label: 'View E-Receipt',
                     onPressed: onSecondaryButtonPressed ?? () {},
                   ),
                 ),
