@@ -17,6 +17,8 @@ class CartView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           appBar: AppBar(
+            surfaceTintColor: Colors.transparent,
+            scrolledUnderElevation: 0,
             leading: Padding(
               padding: const EdgeInsets.only(left: 20),
               child: GestureDetector(

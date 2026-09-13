@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:daza_store_commerce/core/constants/category.dart';
 import 'package:daza_store_commerce/features/dashboard/home/home_viewmodel.dart';
+import 'package:daza_store_commerce/features/dashboard/notification/notification_view.dart';
 import 'package:daza_store_commerce/features/dashboard/product/product_view.dart';
 import 'package:daza_store_commerce/features/dashboard/product_detail/product_detail_view.dart';
 import 'package:daza_store_commerce/features/dashboard/products/products_view.dart';
@@ -51,17 +52,22 @@ class HomeView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Container(
-                              padding: EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: Colors.white38,
-                                borderRadius: BorderRadius.circular(10),
+                            GestureDetector(
+                              onTap: () => NavigationService().navigateToView(
+                                NotificationView(),
                               ),
-                              child: Icon(
-                                Icons.notifications_outlined,
-                                size: 28,
-                                color: Colors.white,
+                              child: Container(
+                                padding: EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  color: Colors.white38,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Icon(
+                                  Icons.notifications_outlined,
+                                  size: 28,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],
