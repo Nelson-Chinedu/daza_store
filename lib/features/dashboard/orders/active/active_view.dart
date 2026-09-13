@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:daza_store_commerce/features/dashboard/orders/track_order/track_order_view.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class ActiveView extends StatelessWidget {
   const ActiveView({super.key});
@@ -18,9 +20,7 @@ class ActiveView extends StatelessWidget {
           return Align(
             alignment: Alignment.topCenter,
             child: Container(
-              padding: const EdgeInsets.all(
-                12,
-              ), // Adds padding inside the border
+              padding: const EdgeInsets.all(12),
               margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
@@ -150,7 +150,14 @@ class ActiveView extends StatelessWidget {
                     spacing: 10,
                     children: [
                       Flexible(child: Button(label: 'Cancel')),
-                      Flexible(child: Button(label: 'Track Order')),
+                      Flexible(
+                        child: Button(
+                          label: 'Track Order',
+                          onPressed: () => NavigationService().navigateToView(
+                            TrackOrderView(),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],

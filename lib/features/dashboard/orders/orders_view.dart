@@ -18,6 +18,21 @@ class OrdersView extends StatelessWidget {
           length: 3,
           child: Scaffold(
             appBar: AppBar(
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: GestureDetector(
+                  onTap: model.goBack,
+                  child: Container(
+                    width: 34,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: const Icon(Icons.arrow_back_ios_sharp, size: 16),
+                  ),
+                ),
+              ),
               title: Text(
                 'My Orders',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),

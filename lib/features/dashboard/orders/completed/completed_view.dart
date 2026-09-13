@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:daza_store_commerce/features/dashboard/orders/review/review_view.dart';
+import 'package:daza_store_commerce/features/dashboard/orders/review/view_e_receipt/view_e_receipt_view.dart';
 import 'package:daza_store_commerce/shared/widgets/button/button_view.dart';
 import 'package:daza_store_commerce/styles/brand_color.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class CompletedView extends StatelessWidget {
   const CompletedView({super.key});
@@ -152,8 +155,21 @@ class CompletedView extends StatelessWidget {
                   Row(
                     spacing: 10,
                     children: [
-                      Flexible(child: Button(label: 'Leave Review')),
-                      Flexible(child: Button(label: 'View E-Receipt')),
+                      Flexible(
+                        child: Button(
+                          label: 'Leave Review',
+                          onPressed: () =>
+                              NavigationService().navigateToView(ReviewView()),
+                        ),
+                      ),
+                      Flexible(
+                        child: Button(
+                          label: 'View E-Receipt',
+                          onPressed: () => NavigationService().navigateToView(
+                            EReceiptView(),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
